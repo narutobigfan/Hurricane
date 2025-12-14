@@ -1615,7 +1615,19 @@ public class Widget {
 	}
 	return(null);
     }
-
+	public <T extends Widget> List<T> findchildren(Class<T> cl) {
+		List<T> list = new ArrayList<T>();
+		for (Widget wdg = child; wdg != null; wdg = wdg.next) {
+			if(cl.isInstance(wdg)) {
+				list.add(cl.cast(wdg));
+			}
+			List<T> ret = wdg.findchildren(cl);
+			if (!ret.isEmpty()) {
+				list.addAll(ret);
+			}
+		}
+		return list;
+	}
     public Widget rprev() {
 	if(prev != null) {
 	    Widget lc = prev.lchild;

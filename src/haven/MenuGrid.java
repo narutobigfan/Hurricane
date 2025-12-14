@@ -778,6 +778,7 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 		makeLocal("customclient/menugrid/Bots/TurnipBot");
 		makeLocal("customclient/menugrid/Bots/CellarDiggingBot");
 		makeLocal("customclient/menugrid/Bots/CleanupBot");
+		makeLocal("customclient/menugrid/Bots/RouteWindow");
 		makeLocal("customclient/menugrid/Bots/GrubGrubBot");
 		makeLocal("customclient/menugrid/Bots/RoastingSpitBot");
 
@@ -950,6 +951,10 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 						gui.cleanupBot = null;
 						gui.cleanupThread = null;
 					}
+				}
+			} else if (ad[2].equals("RouteWindow")) {
+				if (gui.routeWindow == null) {
+					gui.add(new RouteWindow(), UI.scale(new Coord(200, 200)));
 				}
 			} else if (ad[2].equals("GrubGrubBot")) {
 				if (gui.grubGrubBot == null && gui.grubGrubThread == null) {

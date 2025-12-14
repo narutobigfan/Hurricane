@@ -72,7 +72,7 @@ public class UI {
 	public int lastWidgetID = 0;
 	public static Tex province = null;
 	public static Tex realm = null;
-
+	public static UI instance;
     {
 	lastevent = lasttick = Utils.rtime();
     }
@@ -191,6 +191,7 @@ public class UI {
 
     public UI(Context uictx, Coord sz, Runner fun) {
 	this.uictx = uictx;
+	instance = this;
 	root = new RootWidget(this, sz);
 	widgets.put(0, root);
 	rwidgets.put(root, 0);

@@ -27,6 +27,7 @@
 package haven;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class TextEntry extends Widget implements ReadLine.Owner {
@@ -170,6 +171,9 @@ public class TextEntry extends Widget implements ReadLine.Owner {
     public boolean keydown(KeyDownEvent e) {
 	return(buf.key(e.awt));
     }
+	public boolean keydown(KeyEvent e) {
+		return(buf.key(e));
+	}
 
     public void mousemove(MouseMoveEvent ev) {
 	if((d != null) && (tcache != null)) {

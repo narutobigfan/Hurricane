@@ -4320,7 +4320,8 @@ public class OptWnd extends Window {
 	public static CheckBox sendLiveLocationCheckBox;
 	public static TextEntry liveLocationNameTextEntry;
 //	public static TextEntry webmapTokenTextEntry;
-
+	public static TextEntry discordToken;
+	public static TextEntry discordAPI;
 	public static TextEntry cookBookEndpointTextEntry;
 	public static TextEntry cookBookTokenTextEntry;
 
@@ -4381,6 +4382,21 @@ public class OptWnd extends Window {
 				}
 			}, prev.pos("ur").adds(20, 0));
 
+			prev = add(new Label("Discord"), prev.pos("bl").adds(0, 40).x(110));
+			prev = add(new Label("Discord Token:"), prev.pos("bl").adds(0, 16).x(0));
+			prev = add(discordToken = new TextEntry(UI.scale(220), Utils.getpref("discordToken", "")){
+				protected void changed() {
+					Utils.setpref("discordToken", this.buf.line());
+					super.changed();
+				}
+			}, prev.pos("ur").adds(6, 0));
+			prev = add(new Label("Discord API:"), prev.pos("bl").adds(0, 8).x(0));
+			prev = add(discordAPI = new TextEntry(UI.scale(220), Utils.getpref("discordAPI", "https://discord.com/api/v10")){
+				protected void changed() {
+					Utils.setpref("discordAPI", this.buf.line());
+					super.changed();
+				}
+			}, prev.pos("ur").adds(20, 0));
 			Widget backButton;
 			add(backButton = new PButton(UI.scale(200), "Back", 27, back, "Advanced Settings"), prev.pos("bl").adds(0, 26).x(0));
 			pack();

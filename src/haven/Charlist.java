@@ -362,5 +362,9 @@ public class Charlist extends Widget {
 			charSelectThemeStopped = true;
 		}
 	}
-
+	public static void selectChar(String name) {
+		if (instance != null) {
+			instance.wdgmsg("play", name);
+		}
+	}
 }

@@ -114,4 +114,14 @@ public class Following extends Moving {
 	    }
 	}
     }
+	@Override
+	public void ctick(double dt) {
+		super.ctick(dt);
+		final Gob tgt = tgt();
+		if (tgt != null) {
+			if (gob.heldby != this.tgt) {
+				gob.heldby = this.tgt;
+			}
+		}
+	}
 }

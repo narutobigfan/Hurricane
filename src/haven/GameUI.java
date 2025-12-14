@@ -180,6 +180,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	public TurnipBot turnipBot;
 	public Thread turnipThread;
 	public CleanupBot cleanupBot;
+	public RouteWindow routeWindow;
 	public Thread cleanupThread;
 	public GrubGrubBot grubGrubBot;
 	public Thread grubGrubThread;

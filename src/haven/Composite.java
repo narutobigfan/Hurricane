@@ -43,7 +43,8 @@ public class Composite extends Drawable implements EquipTarget {
     public int pseq;
     public List<MD> nmod;
     public List<ED> nequ;
-    private Collection<ResData> nposes = null, tposes = null;
+    public Collection<ResData> nposes = null;
+    private Collection<ResData> tposes = null;
     private boolean nposesold, retainequ = false;
     private float tptime;
     private WrapMode tpmode;

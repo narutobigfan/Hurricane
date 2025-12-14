@@ -1220,4 +1220,13 @@ public class MCache implements MapSource {
 			trimall();
 		}
 	}
+	public Grid getgridbyid(long id) {
+		synchronized (grids) {
+			return grids.values().stream()
+					.filter(x -> x.id == id)
+					.findFirst()
+					.orElse(null);
+		}
+	}
+
 }

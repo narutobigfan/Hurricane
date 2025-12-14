@@ -56,6 +56,7 @@ public class LoginScreen extends Widget {
 	AccountList accounts;
 	private String lastUser = "";
 	private String lastPass = "";
+	public static LoginScreen instance;
 	public static HSlider themeSongVolumeSlider;
 	static public final List<Resource> themes = new ArrayList<>() {{
 		add(Resource.local().loadwait("customclient/sfx/rogueTheme"));
@@ -115,6 +116,7 @@ public class LoginScreen extends Widget {
 
     public LoginScreen(String hostname) {
 	super(bg(haven.MainFrame.gameDir + "res/customclient/bgsizer.png").sz());
+	instance = this;
 	if (Utils.getprefi("loginBgIndex", 0) == 0) {
 		Random rand = new Random();
 		bgIndex = rand.nextInt(keys.size()-1) + 1; // Generates 0–2, then add 1
@@ -732,5 +734,8 @@ public class LoginScreen extends Widget {
 			return bg;
 		}
 	}
-
+	public void login(String username) {
+		this.parent.wdgmsg("forget");
+		this.parent.wdgmsg("login", new AuthClient.NativeCred(lastUser, lastPass), true);
+	}
 }

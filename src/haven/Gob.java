@@ -120,7 +120,7 @@ public class Gob implements RenderTree.Node, Sprite.Owner, Skeleton.ModOwner, Eq
 	public String currentWeapon = "";
     public boolean combatInfoAdded = false;
     private Overlay partyMarkOverlay;
-
+	public long heldby = -1;
     public static class Overlay implements RenderTree.Node, Sprite.Owner {
 	public final int id;
 	public final Gob gob;

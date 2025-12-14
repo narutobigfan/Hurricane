@@ -42,7 +42,7 @@ public class Config {
     public final Properties localprops = getlocalprops();
 	public static final String clientVersion = "v1.41";
 	public static String githubLatestVersion = "Loading...";
-
+	public static final File HOMEDIR = new File( Utils.srcpath(Config.class).toString().replace("hafen.jar", ""), "data").getAbsoluteFile();
     private static Config global = null;
     public static Config get() {
 	if(global != null)

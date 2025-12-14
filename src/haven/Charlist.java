@@ -46,7 +46,7 @@ public class Charlist extends Widget {
     private boolean dirty;
     private boolean showdisc;
 	public static HSlider themeSongVolumeSlider;
-
+	public static Charlist instance;
     @RName("charlist")
     public static class $_ implements Factory {
 	public Widget create(UI ui, Object[] args) {
@@ -57,6 +57,7 @@ public class Charlist extends Widget {
     public Charlist(int height) {
 	super(Coord.z);
 	this.height = height + 1;
+	instance = this;
 	setcanfocus(true);
 	sau = adda(new IButton("gfx/hud/buttons/csau", "u", "d", "o"), bsz.x / 3, 0, 0.5, 0)
 	    .action(() -> scroll(-1));

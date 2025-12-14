@@ -51,6 +51,7 @@ public class LoginScreen extends Widget {
 	public Widget loginSteam = null;
     public final String hostname;
     private Text error, progress;
+	private final CredentialsWidget credentialsWidget;
     private Button optbtn;
 	private OptWnd opts = new OptWnd(false); // ND: This needs to be created when the login screen is created, to prevent options nullpointers once we log into a character
 	AccountList accounts;
@@ -123,6 +124,7 @@ public class LoginScreen extends Widget {
 	} else {
 		bgIndex = Utils.getprefi("loginBgIndex", 0);
 	}
+		add(credentialsWidget = new CredentialsWidget());
 	this.hostname = hostname;
 	Tex bg = bg(backgrounds.get(bgIndex-1));
 	setfocustab(true);
@@ -436,6 +438,7 @@ public class LoginScreen extends Widget {
 		    ret = new AuthClient.TokenCred(user.text(), ptok);
 		}
 		if(ret == null)
+			credentialsWidget.saveCredentials(user.text(), pw);
 		    ret = new AuthClient.NativeCred(user.text(), pw);
 		pass.rsettext("");
 //	    }
@@ -735,7 +738,6 @@ public class LoginScreen extends Widget {
 		}
 	}
 	public void login(String username) {
-		this.parent.wdgmsg("forget");
-		this.parent.wdgmsg("login", new AuthClient.NativeCred(lastUser, lastPass), true);
+		this.credentialsWidget.login(username);
 	}
 }

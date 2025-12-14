@@ -1999,4 +1999,105 @@ public class Widget {
 	.add(UI.class, wdg -> wdg.ui)
 	.add(Glob.class, wdg -> wdg.ui.sess.glob)
 	.add(Session.class, wdg -> wdg.ui.sess);
+
+	public boolean mousedown(Coord c, int button) {
+		for(Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			if(!wdg.visible())
+				continue;
+			Coord cc = xlate(wdg.c, true);
+			if(c.isect(cc, wdg.sz)) {
+				if(wdg.mousedown(c.add(cc.inv()), button)) {
+					return(true);
+				}
+			}
+		}
+		return(false);
+	}
+
+	public boolean mouseup(Coord c, int button) {
+		for(Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			if(!wdg.visible())
+				continue;
+			Coord cc = xlate(wdg.c, true);
+			if(c.isect(cc, wdg.sz)) {
+				if(wdg.mouseup(c.add(cc.inv()), button)) {
+					return(true);
+				}
+			}
+		}
+		return(false);
+	}
+
+	public boolean mousewheel(Coord c, int amount) {
+		for(Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			if(!wdg.visible())
+				continue;
+			Coord cc = xlate(wdg.c, true);
+			if(c.isect(cc, wdg.sz)) {
+				if(wdg.mousewheel(c.add(cc.inv()), amount)) {
+					return(true);
+				}
+			}
+		}
+		return(false);
+	}
+
+	public void mousemove(Coord c) {
+		for(Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			if(!wdg.visible())
+				continue;
+			Coord cc = xlate(wdg.c, true);
+			wdg.mousemove(c.add(cc.inv()));
+		}
+	}
+
+	public boolean mousehover(Coord c) {
+		for (Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			if (!wdg.visible)
+				continue;
+			Coord cc = xlate(wdg.c, true);
+			if (c.isect(cc, wdg.sz) && wdg.mousehover(c.add(cc.inv())))
+				return (true);
+		}
+		return (false);
+	}
+	public boolean mousehover(Coord c, boolean hovering) {
+		boolean ret = false;
+		for(Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			boolean ch = hovering;
+			if(!wdg.visible())
+				ch = false;
+			Coord cc = xlate(wdg.c, true);
+			boolean inside = c.isect(cc, wdg.sz);
+			if(wdg.mousehover(c.add(cc.inv()), ch && inside)) {
+				hovering = false;
+				ret = true;
+			}
+		}
+		return(ret);
+	}
+	public boolean mouseclick(Coord c, int button, int count) {
+		for(Widget wdg = lchild; wdg != null; wdg = wdg.prev) {
+			if(!wdg.visible())
+				continue;
+			Coord cc = xlate(wdg.c, true);
+			if(c.isect(cc, wdg.sz))
+				if(wdg.mouseclick(c.add(cc.inv()), button, count))
+					return(true);
+		}
+		return(false);
+	}
+	public <T extends Widget> List<T> findchilds(Class<T> cl) {
+		List<T> list = new ArrayList<T>();
+		for (Widget wdg = child; wdg != null; wdg = wdg.next) {
+			if (cl.isInstance(wdg)) {
+				list.add(cl.cast(wdg));
+			}
+			List<T> ret = wdg.findchilds(cl);
+			if (ret.size() > 0) {
+				list.addAll(ret);
+			}
+		}
+		return list;
+	}
 }

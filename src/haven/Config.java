@@ -40,7 +40,7 @@ public class Config {
     public static final String confid = "Hurricane";
     public static final Variable<Boolean> par = Variable.def(() -> true);
     public final Properties localprops = getlocalprops();
-	public static final String clientVersion = "v1.41";
+	public static final String clientVersion = "v1.41b";
 	public static String githubLatestVersion = "Loading...";
 	public static final File HOMEDIR = new File( Utils.srcpath(Config.class).toString().replace("hafen.jar", ""), "data").getAbsoluteFile();
     private static Config global = null;
